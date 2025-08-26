@@ -11,8 +11,7 @@ public static class TodoEndpointsExtension
     public static void MapTodoEndpoints(this WebApplication app)
     {
         app.MapGet("/todos", async (
-                    [FromServices]
-                    ApplicationDbContext db) =>
+                    [FromServices] ApplicationDbContext db) =>
         {
             var todos = await db.Todos.ToListAsync();
 
@@ -20,8 +19,7 @@ public static class TodoEndpointsExtension
         });
 
         app.MapGet("/todos/{id}", async (
-                    [FromServices]
-                    ApplicationDbContext db,
+                    [FromServices] ApplicationDbContext db,
                     [FromRoute] int id) =>
         {
             var todo = await db.Todos.FindAsync(id);
