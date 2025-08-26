@@ -1,0 +1,11 @@
+namespace Anv;
+public static partial class AppEnv
+{
+    public static partial class DATABASES
+    {
+        public static partial class SQLITE
+        {
+            public static readonly AnvEnv DATASOURCE = new("DATABASES__SQLITE__DATASOURCE");
+        }
+    }
+}
