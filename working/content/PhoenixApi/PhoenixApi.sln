@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{329013FA-949
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixApi", "src\PhoenixApi\PhoenixApi.csproj", "{793F5646-E32A-4F1B-903C-C2204B825801}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8EBF5671-1E49-4B95-A479-9103A6241579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixApi.Tests.Shared", "tests\PhoenixApi.Tests.Shared\PhoenixApi.Tests.Shared.csproj", "{30E5155C-0DF0-44F0-A99B-8FB71986A778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixApi.Tests.Integration", "tests\PhoenixApi.Tests.Integration\PhoenixApi.Tests.Integration.csproj", "{38AD8E0A-EA49-434A-967D-0527FD3A6F57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +26,18 @@ Global
 		{793F5646-E32A-4F1B-903C-C2204B825801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{793F5646-E32A-4F1B-903C-C2204B825801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{793F5646-E32A-4F1B-903C-C2204B825801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E5155C-0DF0-44F0-A99B-8FB71986A778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E5155C-0DF0-44F0-A99B-8FB71986A778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E5155C-0DF0-44F0-A99B-8FB71986A778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E5155C-0DF0-44F0-A99B-8FB71986A778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AD8E0A-EA49-434A-967D-0527FD3A6F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AD8E0A-EA49-434A-967D-0527FD3A6F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AD8E0A-EA49-434A-967D-0527FD3A6F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AD8E0A-EA49-434A-967D-0527FD3A6F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{793F5646-E32A-4F1B-903C-C2204B825801} = {329013FA-9499-4029-8746-9E45F35FAB71}
+		{30E5155C-0DF0-44F0-A99B-8FB71986A778} = {8EBF5671-1E49-4B95-A479-9103A6241579}
+		{38AD8E0A-EA49-434A-967D-0527FD3A6F57} = {8EBF5671-1E49-4B95-A479-9103A6241579}
 	EndGlobalSection
 EndGlobal
