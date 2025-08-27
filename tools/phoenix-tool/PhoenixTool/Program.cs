@@ -17,10 +17,11 @@ app.AddCommand(
     (
      [Argument(Description = "The App module")] string module,
      [Argument(Description = "The entity to be used")] string entity,
-     [Argument(Description = "Fields")] List<string> fields
+     [Argument(Description = "Fields")] List<string> fields,
+     [Option(Description = "The path to the project")] string? path
     ) =>
     {
-        var choosedFile = CommandHelpers.GetProjectPath();
+        var choosedFile = CommandHelpers.GetProjectPath(path);
 
         if (choosedFile is null)
         {
@@ -46,10 +47,11 @@ app.AddCommand(
     (
      [Argument(Description = "The App module")] string module,
      [Argument(Description = "The entity to be used")] string entity,
-     [Argument(Description = "Fields")] List<string> fields
+     [Argument(Description = "Fields")] List<string> fields,
+     [Option(Description = "The path to the project")] string? path
     ) =>
     {
-        var choosedFile = CommandHelpers.GetProjectPath();
+        var choosedFile = CommandHelpers.GetProjectPath(path);
 
         if (choosedFile is null)
         {

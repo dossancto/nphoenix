@@ -22,7 +22,7 @@ public static class EntityConfigurationFactory
 
         sb.AppendLine($"using {metadata.SolutionName}.Modules.{input.Module}.Domain.Entities;");
 
-        sb.AppendLine($"namespace {metadata.SolutionName}.Modules.{input.Module}.Domain.Entities;");
+        sb.AppendLine($"namespace {metadata.SolutionName}.Modules.{input.Module}.Adapters.Database.Configurations;");
         sb.AppendLine();
 
         sb.AppendLine($"public class {entityName}EntityConfiguration : IEntityTypeConfiguration<{entityName}>");
@@ -35,6 +35,14 @@ public static class EntityConfigurationFactory
         {
             var fieldNameAsPascalCase = StringExtensions.ToPascalCase(fieldDto.FieldName);
             var shouldApplyMaxLength = fieldDto.MaxLength > 0 && fieldDto.TypeName is "string";
+
+            var isPrimaryKey = fieldDto.FieldName.Equals("id", StringComparison.OrdinalIgnoreCase);
+
+            if (isPrimaryKey)
+            {
+                sb.AppendLine($"        builder.HasKey(t => t.{fieldNameAsPascalCase});");
+                sb.AppendLine();
+            }
 
             sb.AppendLine($"        builder.Property(t => t.{fieldNameAsPascalCase})");
 
