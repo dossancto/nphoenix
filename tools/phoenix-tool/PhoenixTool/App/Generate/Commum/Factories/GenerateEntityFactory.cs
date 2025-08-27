@@ -5,7 +5,7 @@ namespace PhoenixTool.App.Generate.Commum.Factories;
 
 public static class GenerateEntityFactory
 {
-  public static string Generate(ScaffoldInput input)
+  public static string Generate(ScaffoldInput input, ProjectMetadata metadata)
   {
     var fieldsDtos = input.Fields
       .Select(FieldTypeDefinition.FromRawString)
@@ -13,7 +13,7 @@ public static class GenerateEntityFactory
 
     var sb = new StringBuilder();
 
-    sb.AppendLine($"namespace Phoenix.Entities.{input.Module};");
+    sb.AppendLine($"namespace {metadata.SolutionName}.Modules.{input.Module}.Domain.Entities;");
     sb.AppendLine();
     sb.AppendLine($"public class {input.Entity}");
     sb.AppendLine("{");

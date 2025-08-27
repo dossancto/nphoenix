@@ -9,8 +9,7 @@ public class GenerateEntityFactoryTest
   public void GenerateEntityFactoryTest_ShouldGenerateEntityFile()
   {
     //Given
-    var input = new ScaffoldInput(
-        "Module",
+    var input = new ScaffoldInput( "Module",
         "Entity",
         [
           "name:string",
@@ -18,12 +17,19 @@ public class GenerateEntityFactoryTest
         ]
         )
     ;
+
+    var metadata = new ProjectMetadata(
+        "Module",
+        "Module",
+        "/tmp"
+      );
+
     //When
-    var res = GenerateEntityFactory.Generate(input);
+    var res = GenerateEntityFactory.Generate(input, metadata);
 
     //Then
     Assert.NotNull(res);
-    Assert.Contains("namespace Phoenix.Entities.Module;", res);
+    Assert.Contains("namespace Module.Modules.Module.Domain.Entities;", res);
     Assert.Contains("public class Entity", res);
     Assert.Contains("public string Name { get; set; } = string.Empty;", res);
     Assert.Contains("public int Age { get; set; }", res);
@@ -42,8 +48,15 @@ public class GenerateEntityFactoryTest
         ]
         )
     ;
+
+    var metadata = new ProjectMetadata(
+        "Module",
+        "Module",
+        "/tmp"
+      );
+
     //When
-    var res = GenerateEntityFactory.Generate(input);
+    var res = GenerateEntityFactory.Generate(input, metadata);
 
     //Then
     Assert.NotNull(res);
@@ -63,8 +76,15 @@ public class GenerateEntityFactoryTest
         ]
         )
     ;
+
+    var metadata = new ProjectMetadata(
+        "Module",
+        "Module",
+        "/tmp"
+      );
+
     //When
-    var res = GenerateEntityFactory.Generate(input);
+    var res = GenerateEntityFactory.Generate(input, metadata);
 
     //Then
     Assert.NotNull(res);
