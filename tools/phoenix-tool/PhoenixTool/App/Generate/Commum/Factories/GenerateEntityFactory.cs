@@ -1,6 +1,7 @@
 using System.Text;
 
 using PhoenixTool.App.Generate.Commum.Dtos;
+using PhoenixTool.App.Generate.Commum.Extensions;
 
 namespace PhoenixTool.App.Generate.Commum.Factories;
 
@@ -16,12 +17,12 @@ public static class GenerateEntityFactory
 
         sb.AppendLine($"namespace {metadata.SolutionName}.Modules.{input.Module}.Domain.Entities;");
         sb.AppendLine();
-        sb.AppendLine($"public class {ToPascalCase(input.Entity)}");
+        sb.AppendLine($"public class {StringExtensions.ToPascalCase(input.Entity)}");
         sb.AppendLine("{");
 
         foreach (var fieldDto in fieldsDtos)
         {
-            var fieldNameAsPascalCase = ToPascalCase(fieldDto.FieldName);
+            var fieldNameAsPascalCase = StringExtensions.ToPascalCase(fieldDto.FieldName);
             var initValue = GetDefaultInitValue(fieldDto);
 
             var formatedInitValue = initValue is null ? "" : $"= {initValue};";
@@ -60,17 +61,4 @@ public static class GenerateEntityFactory
         return null;
     }
 
-    private static string ToPascalCase(string str)
-    {
-        var words = str.Split(["_"], StringSplitOptions.RemoveEmptyEntries);
-
-        var values = words
-          .Select(w =>
-              string.Concat(w.First().ToString().ToUpper(),
-                w.AsSpan(1)));
-
-        var pascalCase = string.Join("", values);
-
-        return pascalCase;
-    }
 }
