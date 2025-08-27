@@ -34,6 +34,7 @@ public static class EntityConfigurationFactory
         foreach (var fieldDto in fieldsDtos)
         {
             var fieldNameAsPascalCase = StringExtensions.ToPascalCase(fieldDto.FieldName);
+            var shouldApplyMaxLength = fieldDto.MaxLength > 0 && fieldDto.TypeName is "string";
 
             sb.AppendLine($"        builder.Property(t => t.{fieldNameAsPascalCase})");
 
@@ -42,7 +43,7 @@ public static class EntityConfigurationFactory
                 sb.AppendLine("            .IsRequired()");
             }
 
-            if (fieldDto.MaxLength > 0)
+            if (shouldApplyMaxLength)
             {
                 sb.AppendLine($"            .HasMaxLength({fieldDto.MaxLength})");
             }
