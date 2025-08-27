@@ -10,7 +10,7 @@ public class GenerateEntityFactoryTest
   {
     //Given
     var input = new ScaffoldInput( "Module",
-        "Entity",
+        "entity",
         [
           "name:string",
           "age:int"

@@ -1,4 +1,7 @@
 ﻿using Cocona;
+using PhoenixTool.App.Commum;
+using PhoenixTool.App.Generate.Commum.Dtos;
+using PhoenixTool.App.Generate.Commum.Factories;
 using Spectre.Console;
 
 var builder = CoconaApp.CreateBuilder();
@@ -13,38 +16,45 @@ app.AddCommand(
      [Argument(Description = "Fields")] List<string> fields
     ) =>
     {
-      Console.WriteLine($"Generating API for {module}.{entity}");
+      var files = ProjectScanner.SearchForCsProjFiles();
 
-      Console.WriteLine($"You fields:\n");
-      foreach (var field in fields)
+      if (files.Length is 0)
       {
-        Console.WriteLine($"  {field}");
-      } 
+        AnsiConsole.MarkupLine("[red]No .csproj file found in the current directory[/]");
+        return;
+      }
+
+      string ChoosedFile;
+
+      if (files.Length is 1)
+      {
+        ChoosedFile = files[0];
+      }
+      else
+      {
+        var prompt = new SelectionPrompt<string>()
+              .Title("What's your [green]favorite .csproj file[/]?")
+              .EnableSearch()
+              .PageSize(3)
+              .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
+              .AddChoices(files);
+
+        ChoosedFile = AnsiConsole.Prompt(prompt);
+      }
+
+      Console.WriteLine(ChoosedFile);
+
+      var projectMetadata = ProjectMetadata.FromCsProjPath(ChoosedFile);
+      var scaffoldInput = new ScaffoldInput(
+          Module: module,
+          Entity: entity,
+          Fields: fields
+      );
+
+      var res = GenerateEntityFactory.Generate(scaffoldInput, projectMetadata);
+
+      Console.WriteLine(res);
     })
     .WithDescription("Gen API endpoint");
-
-app.AddCommand("hello", ([Argument(Description = "Name")] string name) =>
-    {
-      var fruits = AnsiConsole.Prompt(
-      new MultiSelectionPrompt<string>()
-          .Title("What are your [green]favorite fruits[/]?")
-          .NotRequired()
-          .PageSize(10)
-          .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
-          .InstructionsText(
-              "[grey](Press [blue]<space>[/] to toggle a fruit, " +
-              "[green]<enter>[/] to accept)[/]")
-          .AddChoices([
-            "Apple", "Apricot", "Avocado",
-            "Banana", "Blackcurrant", "Blueberry",
-            "Cherry", "Cloudberry", "Coconut",
-          ]));
-
-      foreach (var fruit in fruits)
-      {
-        Console.WriteLine($"You like a {fruit}");
-      }
-    })
-    .WithDescription("Say Hello");
 
 app.Run();

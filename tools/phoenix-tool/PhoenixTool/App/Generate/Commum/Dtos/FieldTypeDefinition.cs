@@ -40,7 +40,6 @@ public record FieldTypeDefinition
       isNullable = true;
     }
 
-
     return new(
         fieldName,
         typeName,

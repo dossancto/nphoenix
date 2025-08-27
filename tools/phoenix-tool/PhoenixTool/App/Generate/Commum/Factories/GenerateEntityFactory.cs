@@ -15,7 +15,7 @@ public static class GenerateEntityFactory
 
     sb.AppendLine($"namespace {metadata.SolutionName}.Modules.{input.Module}.Domain.Entities;");
     sb.AppendLine();
-    sb.AppendLine($"public class {input.Entity}");
+    sb.AppendLine($"public class {ToPascalCase(input.Entity)}");
     sb.AppendLine("{");
 
     foreach (var fieldDto in fieldsDtos)
@@ -26,7 +26,8 @@ public static class GenerateEntityFactory
       var formatedInitValue = initValue is null ? "" : $"= {initValue};";
       var nullable = fieldDto.IsNullable ? "?" : "";
 
-      sb.AppendLine($"public {fieldDto.TypeName}{nullable} {fieldNameAsPascalCase} {{ get; set; }} {formatedInitValue}");
+      sb.AppendLine();
+      sb.AppendLine($"    public {fieldDto.TypeName}{nullable} {fieldNameAsPascalCase} {{ get; set; }} {formatedInitValue}");
     }
 
     sb.AppendLine("}");
@@ -48,6 +49,7 @@ public static class GenerateEntityFactory
     var isPrimitive = typeName switch
     {
       "int" => true,
+      "Guid" => true,
       "decimal" => true,
       "double" => true,
       "float" => true,
@@ -65,7 +67,12 @@ public static class GenerateEntityFactory
       return "[]";
     }
 
-    return "string.Empty";
+    if(typeName is "string")
+    {
+      return "string.Empty;";
+    }
+
+    return null;
   }
 
   private static string ToPascalCase(string str)
