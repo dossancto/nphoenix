@@ -1,0 +1,74 @@
+using PhoenixTool.App.Generate.Commum.Dtos;
+using PhoenixTool.App.Generate.Commum.Factories;
+
+namespace PhoenixTool.Tests.Modules.Generate.Commum.Factories;
+
+public class GenerateEntityFactoryTest
+{
+  [Fact]
+  public void GenerateEntityFactoryTest_ShouldGenerateEntityFile()
+  {
+    //Given
+    var input = new ScaffoldInput(
+        "Module",
+        "Entity",
+        [
+          "name:string",
+          "age:int"
+        ]
+        )
+    ;
+    //When
+    var res = GenerateEntityFactory.Generate(input);
+
+    //Then
+    Assert.NotNull(res);
+    Assert.Contains("namespace Phoenix.Entities.Module;", res);
+    Assert.Contains("public class Entity", res);
+    Assert.Contains("public string Name { get; set; } = string.Empty;", res);
+    Assert.Contains("public int Age { get; set; }", res);
+    Assert.DoesNotContain("public int Age { get; set; } =", res);
+  }
+
+  [Fact]
+  public void GenerateEntityFactoryTest_ShouldGenerateEntityFile_PrimitiveData()
+  {
+    //Given
+    var input = new ScaffoldInput(
+        "Module",
+        "Entity",
+        [
+          "age:int"
+        ]
+        )
+    ;
+    //When
+    var res = GenerateEntityFactory.Generate(input);
+
+    //Then
+    Assert.NotNull(res);
+    Assert.Contains("public int Age { get; set; }", res);
+    Assert.DoesNotContain("public int Age { get; set; } =", res);
+  }
+
+  [Fact]
+  public void GenerateEntityFactoryTest_ShouldGenerateEntityFile_NullableFields()
+  {
+    //Given
+    var input = new ScaffoldInput(
+        "Module",
+        "Entity",
+        [
+          "description:string?"
+        ]
+        )
+    ;
+    //When
+    var res = GenerateEntityFactory.Generate(input);
+
+    //Then
+    Assert.NotNull(res);
+    Assert.Contains("public string? Description { get; set; }", res);
+    Assert.DoesNotContain("public string? Description { get; set; } =", res);
+  }
+}
