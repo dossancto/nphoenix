@@ -30,8 +30,6 @@ public class EntityConfigurationFactoryTest
 
         var res = EntityConfigurationFactory.Create(input, metadata);
 
-        File.WriteAllText("/tmp/EntityConfiguration.cs", res);
-
         //Then
 
         Assert.Contains("""
@@ -89,8 +87,6 @@ public class EntityEntityConfiguration : IEntityTypeConfiguration<Entity>
         //When
 
         var res = EntityConfigurationFactory.Create(input, metadata);
-
-        File.WriteAllText("/tmp/EntityConfiguration.cs", res);
 
         //Then
 

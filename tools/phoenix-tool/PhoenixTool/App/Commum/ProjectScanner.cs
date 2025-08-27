@@ -9,6 +9,19 @@ public static class ProjectScanner
             searchPattern: "*.csproj",
             searchOption: SearchOption.AllDirectories);
 
-        return files.Distinct().ToArray();
+        if (files is null)
+        {
+            return [];
+        }
+
+        var filePathWithoutFileName = files
+            .Select(Path.GetDirectoryName)
+            .Where(x => x is not null)
+            .Cast<string>()
+            .Distinct()
+            .ToArray()
+            ;
+
+        return filePathWithoutFileName;
     }
 }

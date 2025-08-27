@@ -4,6 +4,7 @@ using PhoenixTool.App.Cli;
 using PhoenixTool.App.Commum;
 using PhoenixTool.App.Generate.Commum.Dtos;
 using PhoenixTool.App.Generate.Commum.Factories;
+using PhoenixTool.App.Generate.Commum.Usecases;
 
 using Spectre.Console;
 
@@ -63,9 +64,7 @@ app.AddCommand(
             Fields: fields
         );
 
-        var res = GenerateEntityFactory.Generate(scaffoldInput, projectMetadata);
-
-        Console.WriteLine(res);
+        GenerateSchemeUsecAse.Execute(scaffoldInput, projectMetadata);
     })
     .WithDescription("Gen Application Scheme only");
 
