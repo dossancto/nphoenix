@@ -2,10 +2,10 @@ namespace PhoenixTool.App.Commum;
 
 public static class ProjectScanner
 {
-  public static string[] SearchForCsProjFiles()
+  public static string[] SearchForCsProjFiles(string? path = null)
   {
     var files = Directory.GetFiles(
-        path: Directory.GetCurrentDirectory(),
+        path: path ?? Directory.GetCurrentDirectory(),
         searchPattern: "*.csproj",
         searchOption: SearchOption.AllDirectories);
 

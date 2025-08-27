@@ -35,14 +35,12 @@ app.AddCommand(
         var prompt = new SelectionPrompt<string>()
               .Title("What's your [green]favorite .csproj file[/]?")
               .EnableSearch()
-              .PageSize(3)
+              .PageSize(5)
               .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
               .AddChoices(files);
 
         ChoosedFile = AnsiConsole.Prompt(prompt);
       }
-
-      Console.WriteLine(ChoosedFile);
 
       var projectMetadata = ProjectMetadata.FromCsProjPath(ChoosedFile);
       var scaffoldInput = new ScaffoldInput(

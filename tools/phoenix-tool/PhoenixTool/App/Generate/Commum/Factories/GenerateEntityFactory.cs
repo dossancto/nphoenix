@@ -46,22 +46,6 @@ public static class GenerateEntityFactory
       return null;
     }
 
-    var isPrimitive = typeName switch
-    {
-      "int" => true,
-      "Guid" => true,
-      "decimal" => true,
-      "double" => true,
-      "float" => true,
-      "bool" => true,
-      _ => false
-    };
-
-    if (isPrimitive)
-    {
-      return null;
-    }
-
     if (typeName.StartsWith("List"))
     {
       return "[]";
@@ -69,7 +53,7 @@ public static class GenerateEntityFactory
 
     if(typeName is "string")
     {
-      return "string.Empty;";
+      return "string.Empty";
     }
 
     return null;

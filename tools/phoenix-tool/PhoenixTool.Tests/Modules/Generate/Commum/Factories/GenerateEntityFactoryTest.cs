@@ -13,7 +13,8 @@ public class GenerateEntityFactoryTest
         "entity",
         [
           "name:string",
-          "age:int"
+          "age:int",
+          "created_at:DateTime"
         ]
         )
     ;
@@ -34,6 +35,7 @@ public class GenerateEntityFactoryTest
     Assert.Contains("public string Name { get; set; } = string.Empty;", res);
     Assert.Contains("public int Age { get; set; }", res);
     Assert.DoesNotContain("public int Age { get; set; } =", res);
+    Assert.Contains("public DateTime CreatedAt { get; set; }", res);
   }
 
   [Fact]
