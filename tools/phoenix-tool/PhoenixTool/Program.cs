@@ -21,7 +21,7 @@ app.AddCommand(
      [Option(Description = "The path to the project")] string? path
     ) =>
     {
-        var choosedFile = CommandHelpers.GetProjectPath(path);
+        var choosedFile = CommandHelpers.GetProjectPath(path, true);
 
         if (choosedFile is null)
         {

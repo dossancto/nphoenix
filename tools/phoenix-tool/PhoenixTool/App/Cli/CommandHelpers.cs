@@ -6,11 +6,14 @@ namespace PhoenixTool.App.Cli;
 
 public static class CommandHelpers
 {
-    public static string? GetProjectPath(string? path = null)
+    public static string? GetProjectPath(string? path = null, bool ignoreTestProjects = false)
     {
-        var files = ProjectScanner.SearchForCsProjFiles(path);
+        var files = ProjectScanner.SearchForCsProjFiles(path)
+            ?.Where(x => !ignoreTestProjects || !x.Contains("test", StringComparison.CurrentCultureIgnoreCase))
+            .ToArray()
+            ;
 
-        if (files.Length is 0)
+        if (files is null || files.Length is 0)
         {
             return null;
         }

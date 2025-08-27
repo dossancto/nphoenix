@@ -14,6 +14,11 @@ public static class ProjectScanner
             return [];
         }
 
+        if(files.Length is 0)
+        {
+            return [];
+        }
+
         var filePathWithoutFileName = files
             .Select(Path.GetDirectoryName)
             .Where(x => x is not null)
