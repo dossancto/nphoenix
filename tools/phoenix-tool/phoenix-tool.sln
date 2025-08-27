@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixTool.Tests", "PhoenixTool.Tests\PhoenixTool.Tests.csproj", "{FF5BC7F9-C9A3-4C31-88D8-92B7F76E6D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixTool", "PhoenixTool\PhoenixTool.csproj", "{11B191BD-E510-4A52-9F5F-E5A87EE5E864}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF5BC7F9-C9A3-4C31-88D8-92B7F76E6D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5BC7F9-C9A3-4C31-88D8-92B7F76E6D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5BC7F9-C9A3-4C31-88D8-92B7F76E6D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5BC7F9-C9A3-4C31-88D8-92B7F76E6D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B191BD-E510-4A52-9F5F-E5A87EE5E864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B191BD-E510-4A52-9F5F-E5A87EE5E864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B191BD-E510-4A52-9F5F-E5A87EE5E864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B191BD-E510-4A52-9F5F-E5A87EE5E864}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
