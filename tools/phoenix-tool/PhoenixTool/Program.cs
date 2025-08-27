@@ -1,5 +1,6 @@
 ﻿using Cocona;
 
+using PhoenixTool.App.Cli;
 using PhoenixTool.App.Commum;
 using PhoenixTool.App.Generate.Commum.Dtos;
 using PhoenixTool.App.Generate.Commum.Factories;
@@ -18,33 +19,15 @@ app.AddCommand(
      [Argument(Description = "Fields")] List<string> fields
     ) =>
     {
-        var files = ProjectScanner.SearchForCsProjFiles();
+        var choosedFile = CommandHelpers.GetProjectPath();
 
-        if (files.Length is 0)
+        if (choosedFile is null)
         {
             AnsiConsole.MarkupLine("[red]No .csproj file found in the current directory[/]");
             return;
         }
 
-        string ChoosedFile;
-
-        if (files.Length is 1)
-        {
-            ChoosedFile = files[0];
-        }
-        else
-        {
-            var prompt = new SelectionPrompt<string>()
-                  .Title("What's your [green]favorite .csproj file[/]?")
-                  .EnableSearch()
-                  .PageSize(5)
-                  .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
-                  .AddChoices(files);
-
-            ChoosedFile = AnsiConsole.Prompt(prompt);
-        }
-
-        var projectMetadata = ProjectMetadata.FromCsProjPath(ChoosedFile);
+        var projectMetadata = ProjectMetadata.FromCsProjPath(choosedFile);
         var scaffoldInput = new ScaffoldInput(
             Module: module,
             Entity: entity,
@@ -56,5 +39,34 @@ app.AddCommand(
         Console.WriteLine(res);
     })
     .WithDescription("Gen API endpoint");
+
+app.AddCommand(
+    "gen.scheme",
+    (
+     [Argument(Description = "The App module")] string module,
+     [Argument(Description = "The entity to be used")] string entity,
+     [Argument(Description = "Fields")] List<string> fields
+    ) =>
+    {
+        var choosedFile = CommandHelpers.GetProjectPath();
+
+        if (choosedFile is null)
+        {
+            AnsiConsole.MarkupLine("[red]No .csproj file found in the current directory[/]");
+            return;
+        }
+
+        var projectMetadata = ProjectMetadata.FromCsProjPath(choosedFile);
+        var scaffoldInput = new ScaffoldInput(
+            Module: module,
+            Entity: entity,
+            Fields: fields
+        );
+
+        var res = GenerateEntityFactory.Generate(scaffoldInput, projectMetadata);
+
+        Console.WriteLine(res);
+    })
+    .WithDescription("Gen Application Scheme only");
 
 app.Run();
