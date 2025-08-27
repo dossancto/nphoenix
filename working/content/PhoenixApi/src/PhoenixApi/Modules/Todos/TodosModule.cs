@@ -6,8 +6,6 @@ public static class TodosModule
 {
     public static IServiceCollection AddTodosModule(this IServiceCollection services)
     {
-        services.AddControllers();
-
         return services;
     }
 
