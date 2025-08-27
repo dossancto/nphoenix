@@ -7,14 +7,14 @@ public record ProjectMetadata
     string ProjectPath
 )
 {
-  public static ProjectMetadata FromCsProjPath(string path)
-  {
-    var name = Path.GetFileNameWithoutExtension(path);
-    var solutionName = Path.GetFileNameWithoutExtension(path);
+    public static ProjectMetadata FromCsProjPath(string path)
+    {
+        var name = Path.GetFileNameWithoutExtension(path);
+        var solutionName = Path.GetFileNameWithoutExtension(path);
 
-    return new ProjectMetadata(
-        Name: name,
-        SolutionName: solutionName,
-        ProjectPath: path);
-  }
+        return new ProjectMetadata(
+            Name: name,
+            SolutionName: solutionName,
+            ProjectPath: path);
+    }
 }
